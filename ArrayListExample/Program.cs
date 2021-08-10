@@ -7,27 +7,13 @@ namespace ArrayList.Example
         static void Main(string[] args)
         {
             ArrayList<int> test = new ArrayList<int>();
-            test.Add(5);
-            test.Add(6);
-            test.Add(7);
-            test.Add(5);
-            test.Add(6);
-            test.Add(7);
-            test.Add(5);
-            test.Add(6);
-            test.Add(7);
-            test.Add(5);
-            test.Add(6);
-            test.Add(7);
+            for (int i = 0; i < 10; i++)
+                test.Add(i);
 
-            for (int i = 0; i < test.Count; i++)
-            {
-                Console.WriteLine(test[i]);
-            }
+            test.Insert(3, 6);
 
-            test.GetEnumerator();
-
-            Console.WriteLine(test.IndexOf(7));
+            foreach (var value in test)
+                Console.WriteLine(value);
         }
     }
 }

@@ -118,22 +118,34 @@ namespace ArrayList
         {
             if (index >= 0 && index < Count)
             {
-                T[] temp;
                 if (CheckIfFull())
-                    temp = new T[_items.Length * 2];
-                else
-                    temp = new T[_items.Length];
-                Count++;
-
-                for (int i = 0; i < Count; i++)
                 {
-                    if (i == index)
-                        temp[i] = item;
-                    else
-                        temp[i] = _items[i];
-                }
+                    T[] temp;
+                    temp = new T[_items.Length * 2];
 
-                _items = temp;
+                    for (int i = 0, j = 0; i < Count + 1 && j < Count + 1; i++, j++)
+                    {
+                        if (j == index)
+                        {
+                            temp[j] = item;
+                            i++;
+                        }
+                        temp[i] = _items[j];
+                    }
+
+                    _items = temp;
+                }
+                else
+                    for (int i = Count; i >= 0; i--)
+                    {
+                        _items[i + 1] = _items[i];
+                        if (i == index)
+                        {
+                            _items[index] = item;
+                            return;
+                        }
+                    }
+                Count++;
             }
         }
 
@@ -168,12 +180,12 @@ namespace ArrayList
         }
         public IEnumerator<T> GetEnumerator()
         {
-            throw new NotImplementedException();
+            return ((IEnumerable<T>)_items).Take(Count).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            throw new NotImplementedException();
+            return ((IEnumerable<T>)_items).Take(Count).GetEnumerator();
         }
 
         private void Initialize(int size = 10)

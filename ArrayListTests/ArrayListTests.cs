@@ -55,6 +55,28 @@ namespace ArrayList.Tests
                 test.Add(i);
             test.Insert(3, 6);
 
+            for (int i = 0; i < test.Count; i++)
+            {
+                Console.WriteLine(test[i]);
+            }
+            int actual = test[3];
+            Assert.AreEqual(expected, actual);
+        }
+
+        [TestMethod()]
+        public void InsertFullTest()
+        {
+            int expected = 6;
+            ArrayList<int> test = new ArrayList<int>();
+
+            for (int i = 0; i < 11; i++)
+                test.Add(i);
+            test.Insert(3, 6);
+
+            for (int i = 0; i < test.Count; i++)
+            {
+                Console.WriteLine(test[i]);
+            }
             int actual = test[3];
             Assert.AreEqual(expected, actual);
         }
